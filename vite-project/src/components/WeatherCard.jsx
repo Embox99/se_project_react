@@ -1,11 +1,34 @@
 import "../blocks/WeatherCard.css";
-import cloud from "../assets/Cloud-weather.svg";
+import { weatherOptions, defaultWeatherOptions } from "../utils/constants";
 
-function WeatherCard() {
+function WeatherCard({ weatherData }) {
+  const filteredOptions = weatherOptions.filter((option) => {
+    return (
+      option.day === weatherData.isDay &&
+      option.condition === weatherData.conditions
+    );
+  });
+
+  let weatherOptionUrl;
+  let weatherOptionCondition;
+
+  if (filteredOptions.length === 0) {
+    weatherOptionUrl = defaultWeatherOptions[weatherData.isDay ? [0] : [1]].url;
+    weatherOptionCondition =
+      defaultWeatherOptions[weatherData.isDay ? [0] : [1]].condition;
+  } else {
+    weatherOptionUrl = filteredOptions[0]?.url;
+    weatherOptionCondition = filteredOptions[0]?.condition;
+  }
+
   return (
     <section className="weather-card">
-      <p className="weather-card__temp"> 75 gradusov</p>
-      <img src={cloud} alt="cloud-image" className="weather-card__image" />
+      <p className="weather-card__temp">{weatherData.temp.F}° F</p>
+      <img
+        src={weatherOptionUrl}
+        alt={weatherOptionCondition}
+        className="weather-card__image"
+      />
     </section>
   );
 }
