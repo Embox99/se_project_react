@@ -1,10 +1,8 @@
 import "../blocks/ItemModal.css";
 
-function ItemModal({ activeModal, card, closeModal }) {
+function ItemModal({ card, closeModal, isOpen }) {
   return (
-    <div
-      className={`modal ${activeModal === "preview" ? "modal__opened" : ""}`}
-    >
+    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__content modal__content-type-image">
         <button
           type="button"
@@ -13,7 +11,7 @@ function ItemModal({ activeModal, card, closeModal }) {
         ></button>
         <img
           src={card.link}
-          alt=""
+          alt={card.name}
           className="modal__image modal__image-preview"
         />
         <div className="modal__footer">
