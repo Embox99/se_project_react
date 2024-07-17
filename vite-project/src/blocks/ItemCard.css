@@ -1,0 +1,38 @@
+.card {
+  position: relative;
+  width: 322px;
+  display: flex;
+  justify-content: center;
+  border-radius: 19px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.card__name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 73px;
+  height: 24px;
+  position: absolute;
+  margin: 0;
+  top: 15px;
+  font-family: "Cabinet Grotesk";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 4px;
+}
+
+.card__image {
+  width: 100%;
+}
+
+.cards__text {
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+}
