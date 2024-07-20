@@ -4,20 +4,30 @@
   margin-left: auto;
   align-items: center;
   opacity: 1;
+  color: rgba(126, 126, 126, 1);
+  padding-right: 20px;
+}
+
+.switch:hover {
+  color: black;
+}
+
+.switch:hover .switch__box {
+  border-color: black;
 }
 
 .switch__box {
   border-radius: 25px;
-  border: 2px solid black;
-  width: 50px;
-  height: 30px;
+  border: 2px solid rgba(126, 126, 126, 1);
+  width: 56px;
+  height: 28px;
   appearance: none;
 }
 
 .switch__slider {
   border-radius: 20px;
   width: 30px;
-  height: 30px;
+  height: 28px;
   background-color: black;
   color: white;
   text-align: center;
@@ -26,11 +36,11 @@
 }
 
 .switch__slider-F {
-  left: 22px;
+  left: 28px;
 }
 
 .switch__slider-C {
-  left: 1px;
+  left: 0;
 }
 
 .switch__active {
@@ -44,5 +54,5 @@
 
 .switch__temp-F {
   position: absolute;
-  right: 8px;
+  right: 28px;
 }
