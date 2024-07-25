@@ -1,9 +1,10 @@
 .modal__content-type-image {
-  padding: 0;
+  padding: 0 !important;
 }
 
 .modal__image-preview {
   width: 100%;
+  height: 100%;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
@@ -13,6 +14,11 @@
   right: 24px;
 }
 
+.modal__close-preview {
+  cursor: pointer;
+  color: black;
+}
+
 .modal__caption {
   font-family: "Cabinet Grotesk";
   font-size: 20px;
@@ -20,7 +26,7 @@
   line-height: 24px;
   margin: 0;
   padding-top: 20px;
-  padding-bottom: 12px;
+  padding-left: 32px;
 }
 
 .modal__weather {
@@ -29,9 +35,32 @@
   font-weight: 700;
   line-height: 24px;
   margin: 0;
+  padding-top: 20px;
+  padding-left: 32px;
+  margin-bottom: 32px;
 }
 
 .modal__footer {
-  padding-left: 32px;
-  padding-bottom: 32px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.modal__delete-button {
+  border: none;
+  background-color: white;
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  color: rgba(0, 0, 0, 1);
+  padding: 0;
+  padding: 20px 32px;
+}
+
+.modal__delete-button:hover {
+  color: rgba(255, 77, 0, 1);
+  cursor: pointer;
 }

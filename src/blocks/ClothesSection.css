@@ -24,6 +24,11 @@
   color: rgba(0, 0, 0, 0.6);
 }
 
+.clothes-section__add-btn:hover {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 1);
+}
+
 .clothes-section__your-items {
   margin: 0;
 }
