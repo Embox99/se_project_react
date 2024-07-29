@@ -39,7 +39,8 @@ function App() {
   const onAddItem = (item) => {
     return addItem(item)
       .then(() => {
-        setClothingItems([...clothingItems, item]);
+        setClothingItems([item, ...clothingItems]);
+        closeModal();
       })
       .catch(console.error);
   };
@@ -50,6 +51,7 @@ function App() {
         setClothingItems((prevItems) =>
           prevItems.filter((item) => item._id !== id)
         );
+        closeModal();
       })
       .catch((err) => {
         console.error(err);
@@ -59,11 +61,23 @@ function App() {
   const handleAddItemSubmit = (item) => {
     const newItem = { _id: clothingItems.length + 1, ...item };
     onAddItem(newItem);
-    setClothingItems((prevItems) => {
-      const updatedItems = [newItem, ...prevItems];
-      return updatedItems;
-    });
   };
+
+  useEffect(() => {
+    if (!activeModal) return;
+
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
 
   useEffect(() => {
     getWeather(cordinates, APIkey)

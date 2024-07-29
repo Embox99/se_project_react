@@ -21,7 +21,6 @@ function AddItemModal({ closeModal, onAddItem, activeModal, isOpen }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddItem({ name, imageUrl, weather });
-    closeModal();
   };
 
   return (

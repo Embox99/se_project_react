@@ -26,4 +26,4 @@ function addItem({ name, imageUrl, weather }) {
   }).then(checkServerResponce);
 }
 
-export { getItems, addItem, deleteItem };
+export { getItems, addItem, deleteItem, checkServerResponce };

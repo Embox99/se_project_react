@@ -3,7 +3,6 @@ import "../blocks/ItemModal.css";
 function ItemModal({ card, closeModal, isOpen, handleDeleteCard }) {
   const handleDeleteCardClick = () => {
     handleDeleteCard(card._id);
-    closeModal();
   };
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
