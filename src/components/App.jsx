@@ -39,7 +39,7 @@ function App() {
   const onAddItem = (item) => {
     return addItem(item)
       .then(() => {
-        setClothingItems([item, ...clothingItems]);
+        setClothingItems((clothingItems) => [item, ...clothingItems]);
         closeModal();
       })
       .catch(console.error);
@@ -48,8 +48,8 @@ function App() {
   function handleDeleteCard(id) {
     deleteItem(id)
       .then(() => {
-        setClothingItems((prevItems) =>
-          prevItems.filter((item) => item._id !== id)
+        setClothingItems((clothingItems) =>
+          clothingItems.filter((item) => item._id !== id)
         );
         closeModal();
       })
@@ -59,7 +59,7 @@ function App() {
   }
 
   const handleAddItemSubmit = (item) => {
-    const newItem = { _id: clothingItems.length + 1, ...item };
+    const newItem = { _id: Math.random() * 10, ...item };
     onAddItem(newItem);
   };
 
