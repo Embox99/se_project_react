@@ -38,30 +38,24 @@ function App() {
 
   const onAddItem = (item) => {
     return addItem(item)
-      .then(() => {
-        setClothingItems((clothingItems) => [item, ...clothingItems]);
+      .then((newItem) => {
+        setClothingItems([newItem, ...clothingItems]);
         closeModal();
       })
       .catch(console.error);
   };
 
   function handleDeleteCard(id) {
+    console.log(clothingItems);
     deleteItem(id)
       .then(() => {
-        setClothingItems((clothingItems) =>
-          clothingItems.filter((item) => item._id !== id)
-        );
+        setClothingItems(clothingItems.filter((item) => item._id !== id));
         closeModal();
       })
       .catch((err) => {
         console.error(err);
       });
   }
-
-  const handleAddItemSubmit = (item) => {
-    const newItem = { _id: Math.random() * 10, ...item };
-    onAddItem(newItem);
-  };
 
   useEffect(() => {
     if (!activeModal) return;
@@ -134,7 +128,7 @@ function App() {
           </div>
           <AddItemModal
             closeModal={closeModal}
-            onAddItem={handleAddItemSubmit}
+            onAddItem={onAddItem}
             activeModal={activeModal}
             isOpen={activeModal === "add-garment"}
           />
