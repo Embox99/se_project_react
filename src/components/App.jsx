@@ -11,6 +11,11 @@ import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUni
 import Profile from "./Profile.jsx";
 import AddItemModal from "./AddItemModal.jsx";
 import { deleteItem, getItems, addItem } from "../utils/Api.js";
+import LoginModal from "./LoginModal.jsx";
+import RegisterModal from "./RegisterModal.jsx";
+import { setToken, getToken, removeToken } from "../utils/token.js";
+import { authorization, registration, isTokenValid } from "../utils/auth.js";
+import ProtectedRoute from "./ProtectedRoute.jsx";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -22,6 +27,8 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
+  const [userData, setUserData] = useState({ id: "", name: "", avatarUrl: "" });
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -57,6 +64,30 @@ function App() {
       });
   }
 
+  const handleRegistration = (values) => {
+    registration(values).then((res) => {
+      setIsLoggedIn(true);
+      setToken(res.token);
+      setUserData({
+        id: res._id,
+        name: res.name,
+        avatarUrl: res.avatarUrl,
+      }).catch(console.error);
+    });
+  };
+
+  const handleLogIn = (values) => {
+    authorization(values).then((res) => {
+      setIsLoggedIn(true);
+      setToken(res.token);
+      setUserData({
+        id: res._id,
+        name: res.name,
+        avatarUrl: res.avatarUrl,
+      }).catch(console.error);
+    });
+  };
+
   useEffect(() => {
     if (!activeModal) return;
 
@@ -90,6 +121,22 @@ function App() {
       .catch(console.error);
   }, []);
 
+  useEffect(() => {
+    const jwt = getToken();
+    if (!jwt) return;
+
+    isTokenValid(jwt)
+      .then((res) => {
+        setIsLoggedIn(true);
+        setUserData({
+          id: res.data._id,
+          name: res.data.name,
+          avatarUrl: res.data.avatarUrl,
+        });
+      })
+      .catch(console.error);
+  }, []);
+
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
@@ -116,11 +163,13 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  <Profile
-                    handleCardClick={handleCardClick}
-                    handleAddClick={handleAddClick}
-                    clothingItems={clothingItems}
-                  />
+                  <ProtectedRoute>
+                    <Profile
+                      handleCardClick={handleCardClick}
+                      handleAddClick={handleAddClick}
+                      clothingItems={clothingItems}
+                    />
+                  </ProtectedRoute>
                 }
               />
             </Routes>
@@ -138,6 +187,18 @@ function App() {
             closeModal={closeModal}
             isOpen={activeModal === "preview"}
             handleDeleteCard={handleDeleteCard}
+          />
+          <LoginModal
+            activeModal={activeModal}
+            closeModal={closeModal}
+            isOpen={activeModal === "log in"}
+            handleLogIn={handleLogIn}
+          />
+          <RegisterModal
+            activeModal={activeModal}
+            closeModal={closeModal}
+            isOpen={activeModal === "register"}
+            handleRegistration={handleRegistration}
           />
         </CurrentTemperatureUnitContext.Provider>
       </div>

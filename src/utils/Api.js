@@ -7,6 +7,7 @@ const checkServerResponce = (res) => {
   }
 };
 
+
 function getItems() {
   return fetch(`${baseUrl}/items`).then(checkServerResponce);
 }

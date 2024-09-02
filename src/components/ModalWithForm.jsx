@@ -4,6 +4,7 @@ function ModalWithForm({
   children,
   title,
   buttonText,
+  redirectButtonText,
   closeModal,
   isOpen,
   onSubmit,
@@ -21,6 +22,9 @@ function ModalWithForm({
           {children}
           <button type="submit" className="modal__submit">
             {buttonText}
+          </button>
+          <button type="button" className="modal__text-button">
+            {redirectButtonText}
           </button>
         </form>
       </div>
