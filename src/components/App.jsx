@@ -41,7 +41,7 @@ function App() {
   };
 
   const handleLoginClick = () => {
-    setActiveModal("log in");
+    setActiveModal("login");
   };
 
   const handleRegistrationClick = () => {
@@ -214,7 +214,7 @@ function App() {
             <LoginModal
               activeModal={activeModal}
               closeModal={closeModal}
-              isOpen={activeModal === "log in"}
+              isOpen={activeModal === "login"}
               handleLogIn={handleLogIn}
             />
             <RegisterModal

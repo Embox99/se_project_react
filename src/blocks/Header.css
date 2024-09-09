@@ -39,3 +39,7 @@
 .header__username {
   margin: 0;
 }
+
+.header__button-hidden {
+  display: none;
+}

@@ -41,7 +41,7 @@ function Header({
         onClick={handleRegistrationClick}
         type="button"
         className={`header_add-clothes-btn ${
-          isLogedIn ? "header__button-hiden" : ""
+          isLogedIn ? "header__button-hidden" : ""
         }`}
       >
         Sign Up
