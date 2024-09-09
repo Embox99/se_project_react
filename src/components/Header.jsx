@@ -3,12 +3,21 @@ import logo from "../assets/header-logo.svg";
 import avatar from "../assets/user-avatar.svg";
 import ToogleSwitch from "./ToogleSwitch";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function Header({ handleAddClick, weatherData }) {
+function Header({
+  handleAddClick,
+  weatherData,
+  handleLoginClick,
+  handleRegistrationClick,
+}) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
+
+  const { isLogedIn, userData } = useContext(CurrentUserContext);
 
   return (
     <header className="header">
@@ -22,9 +31,29 @@ function Header({ handleAddClick, weatherData }) {
       <button
         onClick={handleAddClick}
         type="button"
-        className="header__add-clothes-btn"
+        className={`header__add-clothes-btn ${
+          !isLogedIn ? "header__button-hidden" : ""
+        }`}
       >
         + Add Clothes
+      </button>
+      <button
+        onClick={handleRegistrationClick}
+        type="button"
+        className={`header_add-clothes-btn ${
+          isLogedIn ? "header__button-hiden" : ""
+        }`}
+      >
+        Sign Up
+      </button>
+      <button
+        onClick={handleLoginClick}
+        type="button"
+        className={`header_add-clothes-btn ${
+          isLogedIn ? "header__button-hidden" : ""
+        }`}
+      >
+        Log in
       </button>
       <div className="header__user-container">
         <Link to="/profile">
