@@ -32,7 +32,7 @@ function Header({
         onClick={handleAddClick}
         type="button"
         className={`header__add-clothes-btn ${
-          !isLogedIn ? "header__button-hidden" : ""
+          !isLogedIn ? "header__element-hidden" : ""
         }`}
       >
         + Add Clothes
@@ -40,22 +40,22 @@ function Header({
       <button
         onClick={handleRegistrationClick}
         type="button"
-        className={`header_add-clothes-btn ${
-          isLogedIn ? "header__button-hidden" : ""
-        }`}
+        className={`header__btn ${isLogedIn ? "header__element-hidden" : ""}`}
       >
         Sign Up
       </button>
       <button
         onClick={handleLoginClick}
         type="button"
-        className={`header_add-clothes-btn ${
-          isLogedIn ? "header__button-hidden" : ""
-        }`}
+        className={`header__btn ${isLogedIn ? "header__element-hidden" : ""}`}
       >
         Log in
       </button>
-      <div className="header__user-container">
+      <div
+        className={`header__user-container ${
+          !isLogedIn ? "header__element-hidden" : ""
+        }`}
+      >
         <Link to="/profile">
           <p className="header__username">Terence Tegegne</p>{" "}
         </Link>

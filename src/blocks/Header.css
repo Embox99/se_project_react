@@ -25,6 +25,11 @@
   color: rgba(0, 0, 0, 0.6);
 }
 
+.header__btn {
+  border-style: none;
+  color: rgba(0, 0, 0, 1);
+}
+
 .header__add-clothes-btn:hover {
   cursor: pointer;
   color: rgba(0, 0, 0, 1);
@@ -40,6 +45,6 @@
   margin: 0;
 }
 
-.header__button-hidden {
+.header__element-hidden {
   display: none;
 }

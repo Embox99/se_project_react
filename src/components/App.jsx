@@ -52,6 +52,8 @@ function App() {
     setActiveModal("");
   };
 
+
+
   const onAddItem = (item) => {
     return addItem(item)
       .then((newItem) => {
@@ -169,7 +171,7 @@ function App() {
               <Header
                 handleAddClick={handleAddClick}
                 weatherData={weatherData}
-                handleLogInClick={handleLoginClick}
+                handleLoginClick={handleLoginClick}
                 handleRegistrationClick={handleRegistrationClick}
               />
               <Routes>
@@ -216,12 +218,15 @@ function App() {
               closeModal={closeModal}
               isOpen={activeModal === "login"}
               handleLogIn={handleLogIn}
+              handleTextButton={handleRegistrationClick}
+              
             />
             <RegisterModal
               activeModal={activeModal}
               closeModal={closeModal}
               isOpen={activeModal === "register"}
               handleRegistration={handleRegistration}
+              handleTextButton={handleLoginClick}
             />
           </CurrentUserContext.Provider>
         </CurrentTemperatureUnitContext.Provider>

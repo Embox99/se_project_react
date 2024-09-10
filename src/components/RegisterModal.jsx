@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import ModalWithForm from "./ModalWithForm";
 
-function RegisterModal(activeModal, closeModal, isOpen, handleRegistration) {
+function RegisterModal({
+  activeModal,
+  closeModal,
+  isOpen,
+  handleRegistration,
+  handleTextButton,
+}) {
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -24,19 +30,20 @@ function RegisterModal(activeModal, closeModal, isOpen, handleRegistration) {
 
   return (
     <ModalWithForm
-      title="Log in"
-      buttonText="Log in"
-      redirectButtonText="or Register"
+      title="Sign Up"
+      buttonText="Sign Up"
+      redirectButtonText="or Log in"
       activeModal={activeModal}
       closeModal={closeModal}
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      handleTextButton={handleTextButton}
     >
       <label htmlFor="email" className="modal__label">
         Email*
         <input
           type="email"
-          className="modal__label"
+          className="modal__input"
           id="email"
           name="email"
           placeholder="Email"
@@ -49,7 +56,7 @@ function RegisterModal(activeModal, closeModal, isOpen, handleRegistration) {
         Password*
         <input
           type="password"
-          className="modal__label"
+          className="modal__input"
           id="password"
           name="password"
           placeholder="Password"
@@ -59,10 +66,10 @@ function RegisterModal(activeModal, closeModal, isOpen, handleRegistration) {
         />
       </label>
       <label htmlFor="name" className="modal__label">
-        Name
+        Name *
         <input
           type="text"
-          className="modal__label"
+          className="modal__input"
           id="name"
           name="name"
           placeholder="Name"
@@ -72,10 +79,10 @@ function RegisterModal(activeModal, closeModal, isOpen, handleRegistration) {
         />
       </label>
       <label htmlFor="password" className="modal__label">
-        Avatar URL
+        Avatar URL *
         <input
           type="url"
-          className="modal__label"
+          className="modal__input"
           id="avatar-url"
           placeholder="Avatar URL"
           name="avatarUrl"
