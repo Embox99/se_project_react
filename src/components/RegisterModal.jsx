@@ -25,7 +25,13 @@ function RegisterModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleRegistration(data);
+    handleRegistration({
+      email: data.email,
+      password: data.password,
+      name: data.name,
+      avatar: data.avatarUrl,
+    });
+    closeModal();
   };
 
   return (
@@ -70,7 +76,7 @@ function RegisterModal({
         <input
           type="text"
           className="modal__input"
-          id="name"
+          id="register-name"
           name="name"
           placeholder="Name"
           required

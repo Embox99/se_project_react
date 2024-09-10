@@ -52,8 +52,6 @@ function App() {
     setActiveModal("");
   };
 
-
-
   const onAddItem = (item) => {
     return addItem(item)
       .then((newItem) => {
@@ -76,29 +74,33 @@ function App() {
   }
 
   const handleRegistration = (values) => {
-    registration(values).then((res) => {
-      setIsLoggedIn(true);
-      setToken(res.token);
-      setUserData({
-        id: res._id,
-        name: res.name,
-        avatarUrl: res.avatarUrl,
-      }).catch(console.error);
-    });
+    registration(values)
+      .then((res) => {
+        setIsLoggedIn(true);
+        setToken(res.token);
+        setUserData({
+          id: res._id,
+          name: res.name,
+          avatarUrl: res?.avatarUrl,
+        });
+      })
+      .catch(console.error);
   };
 
   const handleLogIn = (values) => {
     if (!values) return;
 
-    authorization(values).then((res) => {
-      setIsLoggedIn(true);
-      setToken(res.token);
-      setUserData({
-        id: res._id,
-        name: res.name,
-        avatarUrl: res.avatarUrl,
-      }).catch(console.error);
-    });
+    authorization(values)
+      .then((res) => {
+        setIsLoggedIn(true);
+        setToken(res.token);
+        setUserData({
+          id: res._id,
+          name: res.name,
+          avatarUrl: res.avatarUrl,
+        });
+      })
+      .catch(console.error);
   };
 
   useEffect(() => {
@@ -219,7 +221,6 @@ function App() {
               isOpen={activeModal === "login"}
               handleLogIn={handleLogIn}
               handleTextButton={handleRegistrationClick}
-              
             />
             <RegisterModal
               activeModal={activeModal}

@@ -60,6 +60,10 @@
   padding: 20px 32px;
 }
 
+.modal__delete-button_hidden {
+  display: none;
+}
+
 .modal__delete-button:hover {
   color: rgba(255, 77, 0, 1);
   cursor: pointer;
