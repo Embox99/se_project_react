@@ -102,7 +102,7 @@ function App() {
     getCurrentUser(token)
       .then((res) => {
         setIsLoggedIn(true);
-        setUserData(res.data);
+        setUserData(res);
         console.log(res.data);
       })
       .catch(console.error);
