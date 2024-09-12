@@ -17,7 +17,7 @@ function Header({
     day: "numeric",
   });
 
-  const { isLogedIn, userData } = useContext(CurrentUserContext);
+  const { isLoggedIn, userData } = useContext(CurrentUserContext);
 
   return (
     <header className="header">
@@ -32,7 +32,7 @@ function Header({
         onClick={handleAddClick}
         type="button"
         className={`header__add-clothes-btn ${
-          !isLogedIn ? "header__element-hidden" : ""
+          !isLoggedIn ? "header__element-hidden" : ""
         }`}
       >
         + Add Clothes
@@ -40,20 +40,20 @@ function Header({
       <button
         onClick={handleRegistrationClick}
         type="button"
-        className={`header__btn ${isLogedIn ? "header__element-hidden" : ""}`}
+        className={`header__btn ${isLoggedIn ? "header__element-hidden" : ""}`}
       >
         Sign Up
       </button>
       <button
         onClick={handleLoginClick}
         type="button"
-        className={`header__btn ${isLogedIn ? "header__element-hidden" : ""}`}
+        className={`header__btn ${isLoggedIn ? "header__element-hidden" : ""}`}
       >
         Log in
       </button>
       <div
         className={`header__user-container ${
-          !isLogedIn ? "header__element-hidden" : ""
+          !isLoggedIn ? "header__element-hidden" : ""
         }`}
       >
         <Link to="/profile">

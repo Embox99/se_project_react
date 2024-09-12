@@ -23,10 +23,16 @@ function LoginModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogIn(data);
-    closeModal();
-    navigate("/profile");
+    handleLogIn(data)
+      .then(() => {
+        closeModal();
+        navigate("/profile");
+      })
+      .catch((err) => {
+        console.error("Login error:", err);
+      });
   };
+  
   return (
     <ModalWithForm
       title="Log in"

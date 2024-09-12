@@ -16,6 +16,7 @@ import {
   getItems,
   addItem,
   updateCurrentUser,
+  getCurrentUser,
 } from "../utils/Api.js";
 import LoginModal from "./LoginModal.jsx";
 import RegisterModal from "./RegisterModal.jsx";
@@ -59,7 +60,8 @@ function App() {
   };
 
   const onAddItem = (item) => {
-    return addItem(item)
+    const token = getToken();
+    return addItem(item, token)
       .then((newItem) => {
         setClothingItems([newItem, ...clothingItems]);
         closeModal();
@@ -68,8 +70,8 @@ function App() {
   };
 
   function handleDeleteCard(id) {
-    console.log(clothingItems);
-    deleteItem(id)
+    const token = getToken();
+    deleteItem(id, token)
       .then(() => {
         setClothingItems(clothingItems.filter((item) => item._id !== id));
         closeModal();
@@ -93,21 +95,37 @@ function App() {
       .catch(console.error);
   };
 
-  const handleLogIn = (values) => {
-    if (!values) return;
-
-    authorization(values)
+  useEffect(() => {
+    const token = getToken();
+    console.log(token);
+    if (!token) return;
+    getCurrentUser(token)
       .then((res) => {
         setIsLoggedIn(true);
+        setUserData(res.data);
+        console.log(res.data);
+      })
+      .catch(console.error);
+  }, []);
+
+  const handleLogIn = (values) => {
+    if (!values) return Promise.reject("No values provided");
+
+    return authorization(values)
+      .then((res) => {
         const token = res.token;
         setToken(token);
+        console.log(token);
         return isTokenValid(token);
       })
       .then((res) => {
         setIsLoggedIn(true);
         setUserData(res);
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error("Authorization failed:", err);
+        return Promise.reject(err);
+      });
   };
 
   const handleUpdateUser = (data) => {
@@ -172,7 +190,7 @@ function App() {
         <CurrentTemperatureUnitContext.Provider
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
         >
-          <CurrentUserContext.Provider value={{ currentUser }}>
+          <CurrentUserContext.Provider value={currentUser}>
             <div className="page__content">
               <Header
                 handleAddClick={handleAddClick}

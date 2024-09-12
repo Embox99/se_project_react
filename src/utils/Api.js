@@ -11,18 +11,36 @@ function getItems() {
   return fetch(`${baseUrl}/items`).then(checkServerResponce);
 }
 
-function deleteItem(id) {
+function deleteItem(id, token) {
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
   }).then(checkServerResponce);
 }
 
-function addItem({ name, imageUrl, weather }) {
+function addItem({ name, imageUrl, weather }, token) {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify({ name, weather, imageUrl }),
+  }).then(checkServerResponce);
+}
+
+function getCurrentUser(token) {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
   }).then(checkServerResponce);
 }
 
@@ -47,4 +65,5 @@ export {
   deleteItem,
   checkServerResponce,
   updateCurrentUser,
+  getCurrentUser,
 };
