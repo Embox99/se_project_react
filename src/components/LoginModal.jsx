@@ -1,6 +1,7 @@
 import React from "react";
 import ModalWithForm from "./ModalWithForm";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function LoginModal({
   activeModal,
@@ -10,6 +11,7 @@ function LoginModal({
   handleTextButton,
 }) {
   const [data, setData] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,6 +24,8 @@ function LoginModal({
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogIn(data);
+    closeModal();
+    navigate("/profile");
   };
   return (
     <ModalWithForm

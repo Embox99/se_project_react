@@ -7,7 +7,6 @@ const checkServerResponce = (res) => {
   }
 };
 
-
 function getItems() {
   return fetch(`${baseUrl}/items`).then(checkServerResponce);
 }
@@ -27,4 +26,25 @@ function addItem({ name, imageUrl, weather }) {
   }).then(checkServerResponce);
 }
 
-export { getItems, addItem, deleteItem, checkServerResponce };
+function updateCurrentUser(data, token) {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      name: data.username,
+      avatarUrl: data.avatarUrl,
+    }).then((res) => checkServerResponce(res)),
+  });
+}
+
+export {
+  getItems,
+  addItem,
+  deleteItem,
+  checkServerResponce,
+  updateCurrentUser,
+};

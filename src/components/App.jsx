@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, BrowserRouter, useNavigate } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import "../blocks/App.css";
 import { cordinates, APIkey } from "../utils/constants";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
@@ -11,9 +11,15 @@ import { getWeather, filterWeatherData } from "../utils/weatherApi.js";
 import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUnitContext.js";
 import Profile from "./Profile.jsx";
 import AddItemModal from "./AddItemModal.jsx";
-import { deleteItem, getItems, addItem } from "../utils/Api.js";
+import {
+  deleteItem,
+  getItems,
+  addItem,
+  updateCurrentUser,
+} from "../utils/Api.js";
 import LoginModal from "./LoginModal.jsx";
 import RegisterModal from "./RegisterModal.jsx";
+import EditProfileModal from "./EditProfileModal.jsx";
 import { setToken, getToken, removeToken } from "../utils/token.js";
 import { authorization, registration, isTokenValid } from "../utils/auth.js";
 import ProtectedRoute from "./ProtectedRoute.jsx";
@@ -93,9 +99,23 @@ function App() {
     authorization(values)
       .then((res) => {
         setIsLoggedIn(true);
-        setToken(res.token);
+        const token = res.token;
+        setToken(token);
+        return isTokenValid(token);
+      })
+      .then((res) => {
+        setIsLoggedIn(true);
+        setUserData(res);
+      })
+      .catch(console.error);
+  };
+
+  const handleUpdateUser = (data) => {
+    const jwt = getToken();
+    updateCurrentUser(data, jwt)
+      .then((res) => {
         setUserData({
-          id: res._id,
+          id: res.id,
           name: res.name,
           avatarUrl: res.avatarUrl,
         });
@@ -132,22 +152,6 @@ function App() {
     getItems()
       .then((data) => {
         setClothingItems(data);
-      })
-      .catch(console.error);
-  }, []);
-
-  useEffect(() => {
-    const jwt = getToken();
-    if (!jwt) return;
-
-    isTokenValid(jwt)
-      .then((res) => {
-        setIsLoggedIn(true);
-        setUserData({
-          id: res.data._id,
-          name: res.data.name,
-          avatarUrl: res.data.avatarUrl,
-        });
       })
       .catch(console.error);
   }, []);
@@ -228,6 +232,12 @@ function App() {
               isOpen={activeModal === "register"}
               handleRegistration={handleRegistration}
               handleTextButton={handleLoginClick}
+            />
+            <EditProfileModal
+              activeModal={activeModal}
+              closeModal={closeModal}
+              isOpen={activeModal === "edit-profile"}
+              handleUpdateUser={handleUpdateUser}
             />
           </CurrentUserContext.Provider>
         </CurrentTemperatureUnitContext.Provider>
