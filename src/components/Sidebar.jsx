@@ -1,9 +1,15 @@
 import "../blocks/Sidebar.css";
 import { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { useNavigate } from "react-router-dom";
 
-function Sidebar({ handleEditProfileClick }) {
+function Sidebar({ handleEditProfileClick, handleLogOut }) {
   const currentUser = useContext(CurrentUserContext);
+  const navigate = useNavigate();
+  const handleLogOutClick = () => {
+    handleLogOut();
+    navigate("/");
+  };
   return (
     <div className="sidebar">
       <div className="sidebar__profile-info">
@@ -21,7 +27,11 @@ function Sidebar({ handleEditProfileClick }) {
       >
         Change profile data
       </button>
-      <button type="button" className="sidebar__logout">
+      <button
+        type="button"
+        className="sidebar__logout"
+        onClick={handleLogOutClick}
+      >
         Log out
       </button>
     </div>

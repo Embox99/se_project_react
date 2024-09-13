@@ -8,11 +8,15 @@ function Profile({
   handleAddClick,
   clothingItems,
   handleEditProfileClick,
+  handleLogOut,
 }) {
   return (
     <div className="profile">
       <section className="profile__slidebar">
-        <Sidebar handleEditProfileClick={handleEditProfileClick} />
+        <Sidebar
+          handleEditProfileClick={handleEditProfileClick}
+          handleLogOut={handleLogOut}
+        />
       </section>
       <section className="profile__clothing-items">
         <ClothesSection

@@ -139,6 +139,12 @@ function App() {
       .catch(console.error);
   };
 
+  const handleLogOut = () => {
+    removeToken();
+    setIsLoggedIn(false);
+    setUserData({ id: "", name: "", avatarUrl: "" });
+  };
+
   useEffect(() => {
     if (!activeModal) return;
 
@@ -216,6 +222,7 @@ function App() {
                         handleAddClick={handleAddClick}
                         clothingItems={clothingItems}
                         handleEditProfileClick={handleEditProfileClick}
+                        handleLogOut={handleLogOut}
                       />
                     </ProtectedRoute>
                   }
