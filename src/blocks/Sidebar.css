@@ -31,9 +31,11 @@
   border: none;
   font-weight: 700;
   margin-bottom: 8px;
+  cursor: pointer;
 }
 
 .sidebar__logout {
   border: none;
   font-weight: 700;
+  cursor: pointer;
 }

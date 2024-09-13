@@ -14,7 +14,11 @@ function Sidebar({ handleEditProfileClick }) {
         />
         <p className="sidebar__username">{currentUser.userData.name}</p>
       </div>
-      <button className="sidebar__edit" onClick={handleEditProfileClick}>
+      <button
+        type="button"
+        className="sidebar__edit"
+        onClick={handleEditProfileClick}
+      >
         Change profile data
       </button>
       <button type="button" className="sidebar__logout">

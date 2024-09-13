@@ -1,4 +1,5 @@
 import ModalWithForm from "./ModalWithForm";
+import { useState } from "react";
 
 export default function EditProfileModal(
   activeModal,
@@ -6,8 +7,21 @@ export default function EditProfileModal(
   isOpen,
   handleUpdateUser
 ) {
+  const [data, setData] = useState({
+    name: "",
+    avatarUrl: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   const handleSubmit = () => {
-    handleUpdateUser(values);
+    handleUpdateUser(data);
     closeModal();
   };
 
@@ -28,9 +42,10 @@ export default function EditProfileModal(
           name="name"
           placeholder="Name"
           required
+          onChange={handleChange}
         />
       </label>
-      <label htmlFor="password" className="modal__label">
+      <label htmlFor="avatar" className="modal__label">
         Avatar URL *
         <input
           type="url"
@@ -39,6 +54,7 @@ export default function EditProfileModal(
           placeholder="Avatar URL"
           name="avatarUrl"
           required
+          onChange={handleChange}
         />
       </label>
     </ModalWithForm>

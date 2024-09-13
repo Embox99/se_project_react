@@ -84,7 +84,7 @@ function RegisterModal({
           value={data.name}
         />
       </label>
-      <label htmlFor="password" className="modal__label">
+      <label htmlFor="avatar" className="modal__label">
         Avatar URL *
         <input
           type="url"
