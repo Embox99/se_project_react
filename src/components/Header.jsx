@@ -57,9 +57,15 @@ function Header({
         }`}
       >
         <Link to="/profile">
-          <p className="header__username">Terence Tegegne</p>{" "}
+          <p className="header__username">{userData.name}</p>{" "}
         </Link>
-        <img src={avatar} alt="Terence Tagegne" className="header__avatar" />
+        {userData?.avatar ? (
+          <img src={userData?.avatar} alt="avatar" className="header__avatar" />
+        ) : (
+          <div className="header__avatar-placeholder">
+            {userData?.name?.charAt(0).toUpperCase() || ""}
+          </div>
+        )}
       </div>
     </header>
   );

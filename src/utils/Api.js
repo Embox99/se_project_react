@@ -55,7 +55,7 @@ function updateCurrentUser(data, token) {
     body: JSON.stringify({
       name: data.username,
       avatarUrl: data.avatarUrl,
-    }).then((res) => checkServerResponce(res)),
+    }).then(checkServerResponce),
   });
 }
 

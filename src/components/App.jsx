@@ -59,6 +59,10 @@ function App() {
     setActiveModal("");
   };
 
+  const handleEditProfileClick = () => {
+    setActiveModal("edit-profile");
+  };
+
   const onAddItem = (item) => {
     const token = getToken();
     return addItem(item, token)
@@ -97,13 +101,11 @@ function App() {
 
   useEffect(() => {
     const token = getToken();
-    console.log(token);
     if (!token) return;
     getCurrentUser(token)
       .then((res) => {
         setIsLoggedIn(true);
         setUserData(res);
-        console.log(res.data);
       })
       .catch(console.error);
   }, []);
@@ -129,14 +131,10 @@ function App() {
   };
 
   const handleUpdateUser = (data) => {
-    const jwt = getToken();
-    updateCurrentUser(data, jwt)
+    const token = getToken();
+    updateCurrentUser(data, token)
       .then((res) => {
-        setUserData({
-          id: res.id,
-          name: res.name,
-          avatarUrl: res.avatarUrl,
-        });
+        setUserData(res);
       })
       .catch(console.error);
   };
@@ -217,6 +215,7 @@ function App() {
                         handleCardClick={handleCardClick}
                         handleAddClick={handleAddClick}
                         clothingItems={clothingItems}
+                        handleEditProfileClick={handleEditProfileClick}
                       />
                     </ProtectedRoute>
                   }
