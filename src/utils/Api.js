@@ -53,10 +53,10 @@ function updateCurrentUser(data, token) {
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
-      name: data.username,
-      avatarUrl: data.avatarUrl,
-    }).then(checkServerResponce),
-  });
+      name: data.name,
+      avatar: data.avatar,
+    }),
+  }).then(checkServerResponce);
 }
 
 export {
