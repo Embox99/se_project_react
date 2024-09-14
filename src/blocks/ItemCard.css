@@ -8,15 +8,16 @@
   overflow: hidden;
 }
 
-.card__name {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 73px;
-  height: 24px;
+.card__title-container {
   position: absolute;
+  padding-top: 12px;
+  display: flex;
+  gap: 12px;
+}
+
+.card__name {
   margin: 0;
-  top: 15px;
+  padding: 2px 12px;
   font-family: "Cabinet Grotesk";
   font-size: 16px;
   font-weight: 700;
@@ -35,4 +36,13 @@
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
+}
+
+.card__like {
+  align-self: center;
+  cursor: pointer;
+}
+
+.card__like-hidden {
+  display: none;
 }

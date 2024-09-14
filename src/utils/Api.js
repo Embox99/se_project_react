@@ -46,7 +46,7 @@ function getCurrentUser(token) {
 
 function updateCurrentUser(data, token) {
   return fetch(`${baseUrl}/users/me`, {
-    method: "POST",
+    method: "PATCH",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -59,6 +59,26 @@ function updateCurrentUser(data, token) {
   }).then(checkServerResponce);
 }
 
+function addCardLike(cardId, token) {
+  return fetch(`${baseUrl}/items/${cardId}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(checkServerResponce);
+}
+
+function deleteCardLike(cardId, token) {
+  return fetch(`${this.baseUrl}/items/${cardId}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(checkServerResponce);
+}
+
 export {
   getItems,
   addItem,
@@ -66,4 +86,6 @@ export {
   checkServerResponce,
   updateCurrentUser,
   getCurrentUser,
+  addCardLike,
+  deleteCardLike,
 };

@@ -17,6 +17,8 @@ import {
   addItem,
   updateCurrentUser,
   getCurrentUser,
+  addCardLike,
+  deleteCardLike,
 } from "../utils/Api.js";
 import LoginModal from "./LoginModal.jsx";
 import RegisterModal from "./RegisterModal.jsx";
@@ -145,6 +147,25 @@ function App() {
     setUserData({ id: "", name: "", avatarUrl: "" });
   };
 
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = getToken();
+    !isLiked
+      ? addCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard.data : item))
+            );
+          })
+          .catch((err) => console.log(err))
+      : deleteCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard.data : item))
+            );
+          })
+          .catch(console.error);
+  };
+
   useEffect(() => {
     if (!activeModal) return;
 
@@ -210,6 +231,7 @@ function App() {
                       weatherData={weatherData}
                       handleCardClick={handleCardClick}
                       clothingItems={clothingItems}
+                      handleCardLike={handleCardLike}
                     />
                   }
                 />
@@ -223,6 +245,7 @@ function App() {
                         clothingItems={clothingItems}
                         handleEditProfileClick={handleEditProfileClick}
                         handleLogOut={handleLogOut}
+                        handleCardLike={handleCardLike}
                       />
                     </ProtectedRoute>
                   }
