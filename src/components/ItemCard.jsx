@@ -8,8 +8,9 @@ function ItemCard({ item, onCardClick, handleCardLike }) {
   const handleCardClick = () => {
     onCardClick(item);
   };
-  const { userData, isLoggedIn } = useContext(CurrentUserContext);
-  const isLiked = item.likes.some((id) => id === userData.id);
+
+  const { isLoggedIn, userData } = useContext(CurrentUserContext);
+  const isLiked = item.likes.some((id) => id === userData._id);
 
   const onCardLike = () => {
     handleCardLike({ id: item._id, isLiked: isLiked });
