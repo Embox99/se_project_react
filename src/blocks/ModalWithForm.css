@@ -88,6 +88,10 @@
   height: 36px;
 }
 
+.modal__submit-disabled {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 .modal__text-button {
   border: none;
   background-color: white;
@@ -118,6 +122,6 @@
   margin-right: 8px;
 }
 
-.modal__radio-input:checked + .modal__label_type_radio {
+.modal__radio-input:checked + span {
   color: rgba(0, 0, 0, 1);
 }

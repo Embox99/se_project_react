@@ -15,12 +15,15 @@ function RegisterModal({
     avatarUrl: "",
   });
 
+  const [isValid, setIsValid] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+    setIsValid(e.target.closest("form").checkValidity());
   };
 
   const handleSubmit = (e) => {
@@ -44,6 +47,7 @@ function RegisterModal({
       isOpen={isOpen}
       onSubmit={handleSubmit}
       handleTextButton={handleTextButton}
+      isValid={isValid}
     >
       <label htmlFor="email" className="modal__label">
         Email*

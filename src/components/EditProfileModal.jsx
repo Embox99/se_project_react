@@ -11,6 +11,7 @@ export default function EditProfileModal({
     name: "",
     avatarUrl: "",
   });
+  const [isValid, setIsValid] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,6 +19,7 @@ export default function EditProfileModal({
       ...prevData,
       [name]: value,
     }));
+    setIsValid(e.target.closest("form").checkValidity());
   };
 
   const handleSubmit = (e) => {
@@ -35,6 +37,7 @@ export default function EditProfileModal({
       isOpen={isOpen}
       onSubmit={handleSubmit}
       closeModal={closeModal}
+      isValid={isValid}
     >
       <label htmlFor="name" className="modal__label">
         Name *

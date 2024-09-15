@@ -12,6 +12,7 @@ function LoginModal({
 }) {
   const [data, setData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+  const [isValid, setIsValid] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,6 +20,7 @@ function LoginModal({
       ...prevData,
       [name]: value,
     }));
+    setIsValid(e.target.closest("form").checkValidity());
   };
 
   const handleSubmit = (e) => {
@@ -32,7 +34,7 @@ function LoginModal({
         console.error("Login error:", err);
       });
   };
-  
+
   return (
     <ModalWithForm
       title="Log in"
@@ -43,6 +45,7 @@ function LoginModal({
       isOpen={isOpen}
       onSubmit={handleSubmit}
       handleTextButton={handleTextButton}
+      isValid={isValid}
     >
       <label htmlFor="email" className="modal__label">
         Email
