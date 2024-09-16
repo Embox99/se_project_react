@@ -26,6 +26,11 @@ function RegisterModal({
     setIsValid(e.target.closest("form").checkValidity());
   };
 
+  const resetForm = () => {
+    setData({ email: "", password: "", name: "", avatarUrl: "" });
+    setIsValid(false);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleRegistration({
@@ -34,6 +39,7 @@ function RegisterModal({
       name: data.name,
       avatar: data.avatarUrl,
     });
+    resetForm();
     closeModal();
   };
 

@@ -22,10 +22,15 @@ export default function EditProfileModal({
     setIsValid(e.target.closest("form").checkValidity());
   };
 
+  const resetForm = () => {
+    setData({ name: "", avatarUrl: "" });
+    setIsValid(false);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(data);
     handleUpdateUser(data);
+    resetForm();
     closeModal();
   };
 
@@ -48,6 +53,7 @@ export default function EditProfileModal({
           name="name"
           placeholder="Name"
           required
+          value={data.name}
           onChange={handleChange}
         />
       </label>
@@ -58,8 +64,9 @@ export default function EditProfileModal({
           className="modal__input"
           id="avatar"
           placeholder="Avatar URL"
-          name="avatar"
+          name="avatarUrl"
           required
+          value={data.avatarUrl}
           onChange={handleChange}
         />
       </label>

@@ -14,9 +14,15 @@ function AddItemModal({ closeModal, onAddItem, activeModal, isOpen }) {
     setIsValid(e.target.closest("form").checkValidity());
   };
 
+  const resetForm = () => {
+    setData({ name: "", imageUrl: "", weather: "" });
+    setIsValid(false);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddItem(data);
+    resetForm();
   };
 
   return (

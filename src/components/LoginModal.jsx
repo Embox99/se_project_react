@@ -23,6 +23,11 @@ function LoginModal({
     setIsValid(e.target.closest("form").checkValidity());
   };
 
+  const resetForm = () => {
+    setData({ email: "", password: "" });
+    setIsValid(false);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogIn(data)
@@ -33,6 +38,7 @@ function LoginModal({
       .catch((err) => {
         console.error("Login error:", err);
       });
+    resetForm();
   };
 
   return (
