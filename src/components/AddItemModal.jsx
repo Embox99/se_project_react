@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ModalWithForm from "./ModalWithForm";
+import "../blocks/AddItemModal.css";
 
 function AddItemModal({ closeModal, onAddItem, activeModal, isOpen }) {
   const [data, setData] = useState({ name: "", imageUrl: "", weather: "" });
