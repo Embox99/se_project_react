@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ModalWithForm from "./ModalWithForm";
+import { useFormAndValidation } from "../utils/useFormAndValidation";
 
 function RegisterModal({
   activeModal,
@@ -8,39 +9,24 @@ function RegisterModal({
   handleRegistration,
   handleTextButton,
 }) {
-  const [data, setData] = useState({
-    email: "",
-    password: "",
-    name: "",
-    avatarUrl: "",
-  });
+  const { values, handleChange, errors, isValid, setValues, resetForm } =
+    useFormAndValidation();
 
-  const [isValid, setIsValid] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    setIsValid(e.target.closest("form").checkValidity());
-  };
-
-  const resetForm = () => {
-    setData({ email: "", password: "", name: "", avatarUrl: "" });
-    setIsValid(false);
+  const resetCurrentForm = () => {
+    resetForm({ email: "", password: "", name: "", avatarUrl: "" });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleRegistration({
-      email: data.email,
-      password: data.password,
-      name: data.name,
-      avatar: data.avatarUrl,
+      email: values.email,
+      password: values.password,
+      name: values.name,
+      avatar: values.avatarUrl,
+    }).then(() => {
+      resetCurrentForm();
+      closeModal();
     });
-    resetForm();
-    closeModal();
   };
 
   return (
@@ -65,7 +51,7 @@ function RegisterModal({
           placeholder="Email"
           required
           onChange={handleChange}
-          value={data.email}
+          value={values.email}
         />
       </label>
       <label htmlFor="password" className="modal__label">
@@ -78,7 +64,7 @@ function RegisterModal({
           placeholder="Password"
           required
           onChange={handleChange}
-          value={data.password}
+          value={values.password}
         />
       </label>
       <label htmlFor="name" className="modal__label">
@@ -91,7 +77,7 @@ function RegisterModal({
           placeholder="Name"
           required
           onChange={handleChange}
-          value={data.name}
+          value={values.name}
         />
       </label>
       <label htmlFor="avatar" className="modal__label">
@@ -104,7 +90,7 @@ function RegisterModal({
           name="avatarUrl"
           required
           onChange={handleChange}
-          value={data.avatarUrl}
+          value={values.avatarUrl}
         />
       </label>
     </ModalWithForm>

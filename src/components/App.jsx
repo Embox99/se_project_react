@@ -70,7 +70,6 @@ function App() {
     return addItem(item, token)
       .then((newItem) => {
         setClothingItems([newItem, ...clothingItems]);
-        closeModal();
       })
       .catch(console.error);
   };
@@ -88,7 +87,7 @@ function App() {
   }
 
   const handleRegistration = (values) => {
-    registration(values)
+    return registration(values)
       .then((res) => {
         setIsLoggedIn(true);
         setToken(res.token);
@@ -119,7 +118,6 @@ function App() {
       .then((res) => {
         const token = res.token;
         setToken(token);
-        console.log(token);
         return isTokenValid(token);
       })
       .then((res) => {
@@ -134,7 +132,7 @@ function App() {
 
   const handleUpdateUser = (data) => {
     const token = getToken();
-    updateCurrentUser(data, token)
+    return updateCurrentUser(data, token)
       .then((res) => {
         setUserData(res);
       })

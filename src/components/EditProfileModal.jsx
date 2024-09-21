@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import ModalWithForm from "./ModalWithForm";
+import { useFormAndValidation } from "../utils/useFormAndValidation";
 
 export default function EditProfileModal({
   activeModal,
@@ -9,42 +10,28 @@ export default function EditProfileModal({
   handleUpdateUser,
 }) {
   const { isLoggedIn, userData } = useContext(CurrentUserContext);
-
-  const [data, setData] = useState({
-    name: "",
-    avatar: "",
-  });
-
-  const [isValid, setIsValid] = useState(false);
+  const { values, handleChange, errors, isValid, setValues, resetForm } =
+    useFormAndValidation();
 
   useEffect(() => {
     if (userData) {
-      setData({
+      setValues({
         name: userData.name || "",
         avatar: userData.avatar || "",
       });
     }
   }, [userData]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    setIsValid(e.target.closest("form").checkValidity());
-  };
-
-  const resetForm = () => {
-    setData({ name: "", avatar: "" });
-    setIsValid(false);
+  const resetCurrentForm = () => {
+    resetForm({ username: "", avatar: "" });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleUpdateUser(data);
-    resetForm();
-    closeModal();
+    handleUpdateUser(values).then(() => {
+      resetCurrentForm();
+      closeModal();
+    });
   };
 
   return (
@@ -66,7 +53,7 @@ export default function EditProfileModal({
           name="name"
           placeholder="Name"
           required
-          value={data.name}
+          value={values.name}
           onChange={handleChange}
         />
       </label>
@@ -79,7 +66,7 @@ export default function EditProfileModal({
           placeholder="Avatar URL"
           name="avatar"
           required
-          value={data.avatar}
+          value={values.avatar}
           onChange={handleChange}
         />
       </label>

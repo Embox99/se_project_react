@@ -2,6 +2,7 @@ import React from "react";
 import ModalWithForm from "./ModalWithForm";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useFormAndValidation } from "../utils/useFormAndValidation";
 
 function LoginModal({
   activeModal,
@@ -10,35 +11,25 @@ function LoginModal({
   handleLogIn,
   handleTextButton,
 }) {
-  const [data, setData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
-  const [isValid, setIsValid] = useState(false);
+  const { values, handleChange, errors, isValid, setValues, resetForm } =
+    useFormAndValidation();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    setIsValid(e.target.closest("form").checkValidity());
-  };
-
-  const resetForm = () => {
-    setData({ email: "", password: "" });
-    setIsValid(false);
+  const resetCurrentForm = () => {
+    resetForm({ email: "", password: "" });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogIn(data)
+    handleLogIn(values)
       .then(() => {
         closeModal();
+        resetCurrentForm();
         navigate("/profile");
       })
       .catch((err) => {
         console.error("Login error:", err);
       });
-    resetForm();
   };
 
   return (
@@ -61,7 +52,7 @@ function LoginModal({
           id="user-email"
           name="email"
           placeholder="Email"
-          value={data.email}
+          value={values.email}
           onChange={handleChange}
           required
         />
@@ -74,7 +65,7 @@ function LoginModal({
           id="user-password"
           name="password"
           placeholder="Password"
-          value={data.password}
+          value={values.password}
           onChange={handleChange}
           required
         />
