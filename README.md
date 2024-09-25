@@ -9,4 +9,8 @@ Currently, two official plugins are available:
 
 **Github pages**
 
--[Link to my website on Github pages](https://embox99.github.io/se_project_react/)
+- [Link to my website on Github pages](https://embox99.github.io/se_project_react/)
+
+**Backend**
+
+- [Link to backend repo](https://github.com/Embox99/se_project_express)
