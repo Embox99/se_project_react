@@ -13,10 +13,7 @@ function AddItemModal({ closeModal, onAddItem, activeModal, isOpen }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItem(values).then(() => {
-      resetCurrentForm();
-      closeModal();
-    });
+    onAddItem(values, resetCurrentForm);
   };
 
   return (
@@ -37,7 +34,7 @@ function AddItemModal({ closeModal, onAddItem, activeModal, isOpen }) {
           id="name"
           name="name"
           placeholder="Name"
-          value={values.name}
+          value={values.name || ""}
           onChange={handleChange}
           required
         />
@@ -50,7 +47,7 @@ function AddItemModal({ closeModal, onAddItem, activeModal, isOpen }) {
           id="imageUrl"
           name="imageUrl"
           placeholder="Image URL"
-          value={values.imageUrl}
+          value={values.imageUrl || ""}
           onChange={handleChange}
           required
         />

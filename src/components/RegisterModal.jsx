@@ -18,15 +18,15 @@ function RegisterModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleRegistration({
-      email: values.email,
-      password: values.password,
-      name: values.name,
-      avatar: values.avatarUrl,
-    }).then(() => {
-      resetCurrentForm();
-      closeModal();
-    });
+    handleRegistration(
+      {
+        email: values.email,
+        password: values.password,
+        name: values.name,
+        avatar: values.avatarUrl,
+      },
+      resetCurrentForm
+    );
   };
 
   return (
@@ -51,7 +51,7 @@ function RegisterModal({
           placeholder="Email"
           required
           onChange={handleChange}
-          value={values.email}
+          value={values.email || ""}
         />
       </label>
       <label htmlFor="password" className="modal__label">
@@ -63,11 +63,11 @@ function RegisterModal({
           name="password"
           placeholder="Password"
           required
-          onChange={handleChange}
+          onChange={handleChange || ""}
           value={values.password}
         />
       </label>
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="register-name" className="modal__label">
         Name *
         <input
           type="text"
@@ -76,11 +76,11 @@ function RegisterModal({
           name="name"
           placeholder="Name"
           required
-          onChange={handleChange}
+          onChange={handleChange || ""}
           value={values.name}
         />
       </label>
-      <label htmlFor="avatar" className="modal__label">
+      <label htmlFor="avatar-url" className="modal__label">
         Avatar URL *
         <input
           type="url"
@@ -89,7 +89,7 @@ function RegisterModal({
           placeholder="Avatar URL"
           name="avatarUrl"
           required
-          onChange={handleChange}
+          onChange={handleChange || ""}
           value={values.avatarUrl}
         />
       </label>

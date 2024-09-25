@@ -65,11 +65,13 @@ function App() {
     setActiveModal("edit-profile");
   };
 
-  const onAddItem = (item) => {
+  const onAddItem = (item, resetCurrentForm) => {
     const token = getToken();
-    return addItem(item, token)
+    addItem(item, token)
       .then((newItem) => {
         setClothingItems([newItem, ...clothingItems]);
+        resetCurrentForm();
+        closeModal();
       })
       .catch(console.error);
   };
@@ -87,7 +89,7 @@ function App() {
   }
 
   const handleRegistration = (values) => {
-    return registration(values)
+    registration(values)
       .then((res) => {
         setIsLoggedIn(true);
         setToken(res.token);
@@ -96,6 +98,8 @@ function App() {
           name: res.name,
           avatarUrl: res?.avatarUrl,
         });
+        resetCurrentForm();
+        closeModal();
       })
       .catch(console.error);
   };
@@ -111,10 +115,10 @@ function App() {
       .catch(console.error);
   }, []);
 
-  const handleLogIn = (values) => {
+  const handleLogIn = (values, resetCurrentForm) => {
     if (!values) return Promise.reject("No values provided");
 
-    return authorization(values)
+    authorization(values)
       .then((res) => {
         const token = res.token;
         setToken(token);
@@ -123,6 +127,8 @@ function App() {
       .then((res) => {
         setIsLoggedIn(true);
         setUserData(res);
+        resetCurrentForm();
+        closeModal();
       })
       .catch((err) => {
         console.error("Authorization failed:", err);
@@ -130,11 +136,13 @@ function App() {
       });
   };
 
-  const handleUpdateUser = (data) => {
+  const handleUpdateUser = (data, resetCurrentForm) => {
     const token = getToken();
-    return updateCurrentUser(data, token)
+    updateCurrentUser(data, token)
       .then((res) => {
         setUserData(res);
+        resetCurrentForm();
+        closeModal();
       })
       .catch(console.error);
   };

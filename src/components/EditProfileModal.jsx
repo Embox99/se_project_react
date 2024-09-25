@@ -28,10 +28,7 @@ export default function EditProfileModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleUpdateUser(values).then(() => {
-      resetCurrentForm();
-      closeModal();
-    });
+    handleUpdateUser(values, resetCurrentForm);
   };
 
   return (
@@ -44,7 +41,7 @@ export default function EditProfileModal({
       closeModal={closeModal}
       isValid={isValid}
     >
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="username" className="modal__label">
         Name *
         <input
           type="text"
@@ -53,7 +50,7 @@ export default function EditProfileModal({
           name="name"
           placeholder="Name"
           required
-          value={values.name}
+          value={values.name || ""}
           onChange={handleChange}
         />
       </label>
@@ -66,7 +63,7 @@ export default function EditProfileModal({
           placeholder="Avatar URL"
           name="avatar"
           required
-          value={values.avatar}
+          value={values.avatar || ""}
           onChange={handleChange}
         />
       </label>

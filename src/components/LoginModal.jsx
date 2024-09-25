@@ -21,10 +21,8 @@ function LoginModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogIn(values)
+    handleLogIn(values, resetCurrentForm)
       .then(() => {
-        closeModal();
-        resetCurrentForm();
         navigate("/profile");
       })
       .catch((err) => {
@@ -44,7 +42,7 @@ function LoginModal({
       handleTextButton={handleTextButton}
       isValid={isValid}
     >
-      <label htmlFor="email" className="modal__label">
+      <label htmlFor="user-email" className="modal__label">
         Email
         <input
           type="email"
@@ -52,12 +50,12 @@ function LoginModal({
           id="user-email"
           name="email"
           placeholder="Email"
-          value={values.email}
+          value={values.email || ""}
           onChange={handleChange}
           required
         />
       </label>
-      <label htmlFor="password" className="modal__label">
+      <label htmlFor="user-password" className="modal__label">
         Password
         <input
           type="password"
@@ -65,7 +63,7 @@ function LoginModal({
           id="user-password"
           name="password"
           placeholder="Password"
-          value={values.password}
+          value={values.password || ""}
           onChange={handleChange}
           required
         />
