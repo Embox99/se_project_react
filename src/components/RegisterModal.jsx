@@ -63,8 +63,8 @@ function RegisterModal({
           name="password"
           placeholder="Password"
           required
-          onChange={handleChange || ""}
-          value={values.password}
+          onChange={handleChange}
+          value={values.password || ""}
         />
       </label>
       <label htmlFor="register-name" className="modal__label">
@@ -76,8 +76,8 @@ function RegisterModal({
           name="name"
           placeholder="Name"
           required
-          onChange={handleChange || ""}
-          value={values.name}
+          onChange={handleChange}
+          value={values.name || ""}
         />
       </label>
       <label htmlFor="avatar-url" className="modal__label">
@@ -89,8 +89,8 @@ function RegisterModal({
           placeholder="Avatar URL"
           name="avatarUrl"
           required
-          onChange={handleChange || ""}
-          value={values.avatarUrl}
+          onChange={handleChange}
+          value={values.avatarUrl || ""}
         />
       </label>
     </ModalWithForm>
