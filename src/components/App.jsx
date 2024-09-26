@@ -118,7 +118,7 @@ function App() {
   const handleLogIn = (values, resetCurrentForm) => {
     if (!values) return Promise.reject("No values provided");
 
-    authorization(values)
+   return authorization(values)
       .then((res) => {
         const token = res.token;
         setToken(token);
