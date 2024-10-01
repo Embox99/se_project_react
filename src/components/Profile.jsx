@@ -1,6 +1,6 @@
 import React from "react";
 import "../blocks/Profile.css";
-import SideBar from "./Sidebar";
+import SideBar from "./SideBar";
 import ClothesSection from "../components/ClothesSection";
 
 function Profile({
