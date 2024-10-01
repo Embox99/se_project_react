@@ -1,6 +1,6 @@
 import "../blocks/Header.css";
 import logo from "../assets/header-logo.svg";
-import ToogleSwitch from "./ToggleSwitch";
+import ToggleSwitch from "./ToggleSwitch";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -26,7 +26,7 @@ function Header({
       <p className="header__date-and-location">
         {currentDate}, {weatherData.city}
       </p>
-      <ToogleSwitch />
+      <ToggleSwitch />
       <button
         onClick={handleAddClick}
         type="button"

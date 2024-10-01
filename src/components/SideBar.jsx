@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { useNavigate } from "react-router-dom";
 
-function Sidebar({ handleEditProfileClick, handleLogOut }) {
+function SideBar({ handleEditProfileClick, handleLogOut }) {
   const currentUser = useContext(CurrentUserContext);
   const navigate = useNavigate();
   const handleLogOutClick = () => {
@@ -38,4 +38,4 @@ function Sidebar({ handleEditProfileClick, handleLogOut }) {
   );
 }
 
-export default Sidebar;
+export default SideBar;

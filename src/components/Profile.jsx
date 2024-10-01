@@ -1,6 +1,6 @@
 import React from "react";
 import "../blocks/Profile.css";
-import Sidebar from "./SideBar";
+import SideBar from "./Sidebar";
 import ClothesSection from "../components/ClothesSection";
 
 function Profile({
@@ -14,7 +14,7 @@ function Profile({
   return (
     <div className="profile">
       <section className="profile__slidebar">
-        <Sidebar
+        <SideBar
           handleEditProfileClick={handleEditProfileClick}
           handleLogOut={handleLogOut}
         />
