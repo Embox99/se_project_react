@@ -1,4 +1,6 @@
-const BASE_URL = "http://localhost:3001";
+const BASE_URL = "production"
+  ? "api.wtwrp.crabdance.com"
+  : "http://localhost:3001";
 import { checkServerResponce } from "./Api";
 
 export const registration = ({ name, avatar, email, password }) => {

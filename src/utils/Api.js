@@ -1,4 +1,6 @@
-const baseUrl = "http://localhost:3001";
+const baseUrl = "production"
+  ? "api.wtwrp.crabdance.com"
+  : "http://localhost:3001";
 const checkServerResponce = (res) => {
   if (res.ok) {
     return res.json();
