@@ -1,5 +1,5 @@
 const BASE_URL = "production"
-  ? "api.wtwrp.crabdance.com"
+  ? "https://api.wtwrp.crabdance.com"
   : "http://localhost:3001";
 import { checkServerResponce } from "./Api";
 

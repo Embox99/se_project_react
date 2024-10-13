@@ -2,7 +2,7 @@
   "name": "vite-project",
   "private": true,
   "version": "0.0.0",
-  "homepage": "wtwrp.crabdance.com",
+  "homepage": "https://wtwrp.crabdance.com",
   "type": "module",
   "scripts": {
     "dev": "vite --open",

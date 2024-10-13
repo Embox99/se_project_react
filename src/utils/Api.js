@@ -1,5 +1,5 @@
 const baseUrl = "production"
-  ? "api.wtwrp.crabdance.com"
+  ? "https://api.wtwrp.crabdance.com"
   : "http://localhost:3001";
 const checkServerResponce = (res) => {
   if (res.ok) {
