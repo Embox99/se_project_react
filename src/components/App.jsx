@@ -118,7 +118,7 @@ function App() {
   const handleLogIn = (values, resetCurrentForm) => {
     if (!values) return Promise.reject("No values provided");
 
-   return authorization(values)
+    return authorization(values)
       .then((res) => {
         const token = res.token;
         setToken(token);
@@ -216,7 +216,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter basename="/se_project_react">
+    <BrowserRouter>
       <div className="page">
         <CurrentTemperatureUnitContext.Provider
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
