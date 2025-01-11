@@ -32,6 +32,7 @@ For the application to function correctly, ensure that the back-end server ([Lin
 **Screenshots**
 
 ***Main page***
+
 <img src="https://i.ibb.co/jVm5rtJ/main-page.jpg" alt="Home Page Screenshot" width="600" />
 
 ***Profile page***
